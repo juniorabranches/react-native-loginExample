@@ -5,6 +5,7 @@ import CadastroForm from './cadastroForm';
 
 export  default class Cadastro extends Component {
     render() {
+      const { goBack } = this.props.navigation;
       return  (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <View style={styles.loginContainer}>
@@ -13,6 +14,18 @@ export  default class Cadastro extends Component {
           <View>
             <CadastroForm />
           </View>
+          <View style={styles.buttonView}>
+            <TouchableOpacity style={styles.buttonContainer}>
+                         <Text  style={styles.buttonText}>Cadastre-se</Text>
+            </TouchableOpacity>
+
+
+            <TouchableOpacity style={styles.labelButton} onPress={() => goBack()}>
+              <Text style={styles.labels}>
+                <Text style={styles.labelText}>Já se cadastrou?</Text><Text style={styles.labelBoldText}> Clique aqui</Text>
+              </Text>
+            </TouchableOpacity>
+          </View>
         </KeyboardAvoidingView>
       );
     }
@@ -20,6 +33,9 @@ export  default class Cadastro extends Component {
 }
 
 const styles = StyleSheet.create({
+  buttonView: {
+   padding: 20
+  },
   container: {
       flex: 1,
       backgroundColor: '#FFF',
@@ -40,5 +56,32 @@ const styles = StyleSheet.create({
       width: 180,
       textAlign: 'center',
       opacity: 0.9
+  },
+  buttonContainer:{
+      backgroundColor: '#2980b6',
+      paddingVertical: 15,
+      borderRadius: 25
+  },
+  buttonText:{
+      color: '#fff',
+      textAlign: 'center',
+      fontWeight: '700'
+  },
+  labelText:{
+      color: '#000',
+      textAlign: 'center',
+  },
+  labelBoldText:{
+      color: '#000',
+      textAlign: 'center',
+      fontWeight: '700'
+  },
+  labelButton:{
+      paddingTop: 10,
+  },
+  labels:{
+    flexDirection: 'row',
+    textAlign: 'center',
   }
 });
+

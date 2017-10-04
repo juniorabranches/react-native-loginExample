@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import { View, Text, Image, StyleSheet, KeyboardAvoidingView  } from 'react-native';
+import {  View, Text, TextInput, TouchableOpacity, Image, Alert, Button ,StyleSheet ,StatusBar, Container, KeyboardAvoidingView } from 'react-native';
+
+import { StackNavigator } from 'react-navigation';
 
 import LoginForm from './loginForm';
 
-
 export default class Login extends Component {
   render() {
+    const { navigate } = this.props.navigation;
     return  (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.loginContainer}>
@@ -14,15 +16,29 @@ export default class Login extends Component {
         <View>
           <LoginForm />
         </View>
+        <View style={styles.buttonView}>
+          <TouchableOpacity style={styles.buttonContainer}
+                               onPress={() => navigate('Cadastro')}>
+                       <Text  style={styles.buttonText}>Acessar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Cadastro')}>
+            <Text style={styles.labels}>
+              <Text style={styles.labelText}>Não tem uma conta?</Text><Text style={styles.labelBoldText}> Cadastre-se agora</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  buttonView: {
+   padding: 20
+  },
   container: {
       flex: 1,
-      backgroundColor: '#FFF',
+      backgroundColor: '#FFF'
   },
   loginContainer:{
       alignItems: 'center',
@@ -34,11 +50,30 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%'
   },
-  title:{
-      color: "#FFF",
-      marginTop: 120,
-      width: 180,
+  labelText:{
+      color: '#000',
       textAlign: 'center',
-      opacity: 0.9
+  },
+  labelBoldText:{
+      color: '#000',
+      textAlign: 'center',
+      fontWeight: '700'
+  },
+  labelButton:{
+      paddingTop: 10,
+  },
+  labels:{
+    flexDirection: 'row',
+    textAlign: 'center',
+  },
+  buttonContainer:{
+      backgroundColor: '#2980b6',
+      paddingVertical: 15,
+      borderRadius: 25
+  },
+  buttonText:{
+      color: '#fff',
+      textAlign: 'center',
+      fontWeight: '700'
   }
 });
