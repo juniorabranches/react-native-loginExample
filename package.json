@@ -11,6 +11,7 @@
 		"react-native": "^0.48.4",
 		"react-native-elements": "^0.17.0",
 		"react-native-fast-image": "^1.0.0",
+		"react-native-form-validation": "^1.0.4",
 		"react-native-masonry": "^0.4.2",
 		"react-native-material-dropdown": "^0.4.2",
 		"react-native-search-box": "0.0.12",
