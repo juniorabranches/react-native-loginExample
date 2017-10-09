@@ -9,20 +9,25 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 import Login from './src/components/login/login';
-import LoginForm from './src/components/login/loginForm';
 import Cadastro from './src/components/cadastro/cadastro';
-import CadastroForm from './src/components/cadastro/cadastroForm';
+import Logout from './src/components/logout/logout';
+import Senha from './src/components/senha/senha';
+import Feed from './src/components/feed/feed';
+import Header from './src/components/feed/header';
 
 const LoginApp = StackNavigator({
   Login: { screen: Login },
-  LoginForm: { screen: LoginForm},
   Cadastro: { screen: Cadastro },
-  CadastroForm: { screen: CadastroForm },
+  Senha: { screen: Senha },
+  Logout: { screen: Logout },
+  Feed: { screen: Feed },
+  Header: { screen: Header }
   },
   {
     initialRouterName: 'Login',
     headerMode: 'none',
-});
+  },
+);
 
 export default class loginExample extends Component {
   render() {
