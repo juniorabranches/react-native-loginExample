@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
-import {  Slider, View, Text, TextInput, TouchableOpacity, Image, Alert ,StyleSheet ,StatusBar, Container, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import {  Dimensions, Slider, View, Text, TextInput, TouchableOpacity, Image, Alert ,StyleSheet ,StatusBar, Container, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 
 import { Card, ListItem, Button } from 'react-native-elements'
 import Masonry from 'react-native-masonry';
-import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import Search from 'react-native-search-box';
 
 import Header from './header'
 
-const Tab1 = () => <View style={[ styles.tabs, { backgroundColor: '#2980b6' } , {justifyContent: 'center'}]} />;
-const Tab2 = () => <View style={[ styles.tabs, { backgroundColor: '#2980b6' } , {justifyContent: 'center'}]} />;
-const Tab3 = () => <View style={[ styles.tabs, { backgroundColor: '#2980b6' } , {justifyContent: 'center'}]} />;
-const rowHeight = 40;
 const data = [
   {
     data: {
@@ -101,47 +96,53 @@ const data = [
   }
 ];
 
+// Tabs
+let {width} = Dimensions.get('window');
+let widthTab = width / 3;
+const Tabs = ( {children} ) => {
+  return (
+    <View style={{height: 50, width: width, borderBottomWidth: 1, justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', backgroundColor: '#2980b6'}}>
+      {children}
+    </View>
+  )
+}
+
+const Tab = ( {title, active = false} ) => {
+  return (
+    <View style={[{height: 50, width: widthTab, justifyContent: 'center', alignItems: 'center', backgroundColor: '#2980b6'},
+                  active ? {borderBottomWidth: 2, borderBottomColor: '#fff'} : {}
+                ]}>
+      <Text style ={{color: '#fff'}}> {title} </Text>
+    </View>
+  )
+}
+//  /Tabs
+
 export  default class Feed extends Component {
   constructor() {
     super();
     this.state = {
       columns: 2,
-      padding: 5,
-      index: 0,
-      routes: [
-        { key: '1', title: '1' },
-        { key: '2', title: '2' },
-        { key: '3', title: '3'}
-      ],
-
-    };
+      padding: 5
+      }
   }
-
-  _handleIndexChange = index => this.setState({ index });
-
-  _renderHeader = props => <TabBar {...props} />;
-
-  _renderScene = SceneMap({
-    '1': Tab1,
-    '2': Tab2,
-    '3': Tab3
-  });
 
   render() {
     const { navigate } = this.props.navigation;
     return (
 
         <Image source={require('../../components/images/background.png')} style={styles.container}>
-
           <View style={{ flex: 0, padding: 10}}>
             <Search ref="search_box" placeholder="Busque por um assunto"/>
           </View>
-          <TabViewAnimated
-            style={styles.tabs}
-            navigationState={this.state}
-            renderScene={this._renderScene}
-            renderHeader={this._renderHeader}
-            onIndexChange={this._handleIndexChange} />
+
+          <View>
+            <Tabs>
+              <Tab title='Tab1' active={true}/>
+              <Tab title='Tab2'/>
+              <Tab title='Tab3'/>
+            </Tabs>
+          </View>
 
 
 
@@ -159,51 +160,12 @@ export  default class Feed extends Component {
 }
 
 const styles = StyleSheet.create({
-  tabs: {
-    flex: 0,
-  },
   container: {
     flex: 1,
     width: undefined,
     height: undefined,
     backgroundColor:'transparent',
     justifyContent: 'flex-start',
-  },
-  logo:{
-
-  },
-  header: {
-    flexGrow: 1
-  },
-  buttonGroup: {
-    flexGrow: 1
-  },
-  slider: {
-    flexGrow: 1
-  },
-  button: {
-    backgroundColor: '#dbdcdb',
-    padding: 10,
-    marginRight: 4,
-    borderRadius: 4,
-    borderBottomColor: '#7b7b7b',
-    borderBottomWidth: 5
-  },
-  buttonText: {
-    color: '#404040'
-  },
-  center: {
-    marginTop: 30,
-    marginBottom: 20,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  headerTop: {
-    flexDirection: 'row',
-    padding: 5,
-    alignItems: 'center',
-    backgroundColor: 'white'
   },
   userPic: {
     height: 20,

@@ -4,6 +4,30 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { Form, FormItem } from 'react-native-form-validation';
 
 export  default class Cadastro extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      nameInput:'1',
+      textInput2:'2',
+      textInput3:'3',
+      textInput4:'4',
+      view1:'1'
+    };
+  }
+    textChange(event){
+      this.setState({
+        nameInput:event.nativeEvent.text
+      });
+    }
+
+    submit(){
+      let submitResults = this.refs.form.validate();
+    }
+
+    customValidation(){
+      return true;
+    }
+
     render() {
       let data = [{
         value: 'Mecânico Eletrônico',
@@ -12,6 +36,8 @@ export  default class Cadastro extends Component {
       }];
 
       const { goBack } = this.props.navigation;
+
+
 
       return  (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -23,7 +49,8 @@ export  default class Cadastro extends Component {
 			            ref='form'
 			            shouldValidate={true}>
 			            <FormItem
-			              isRequired={true}>
+			              isRequired={true} validationFunction={this.customValidation.bind(this)}>
+
 			                <TextInput style = {styles.input}
 			                              autoCapitalize="none"
 			                              //onSubmitEditing={() => this.dropDown.focus()}
@@ -32,7 +59,9 @@ export  default class Cadastro extends Component {
 			                              keyboardType='default'
 			                              returnKeyType="next"
 			                              placeholder='Nome do usuário'
-			                              placeholderTextColor="#000"/>
+			                              placeholderTextColor="#000"
+                                    value={this.state.nameInput}
+                                    onChange={this.textChange.bind(this)}/>
 			            </FormItem>
 			            <FormItem
 			              isRequired={true}>
@@ -77,7 +106,7 @@ export  default class Cadastro extends Component {
           </Form>
           </View>
           <View style={styles.buttonView}>
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.buttonContainer} onPress={this.submit.bind(this)}>
                          <Text  style={styles.buttonText}>Cadastre-se</Text>
             </TouchableOpacity>
 
