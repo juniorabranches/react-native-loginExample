@@ -40,7 +40,7 @@ export default class Login extends Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Logout')}>
           <Text style={styles.labels}>
-            <Text style={styles.labelText}>Teste Tela Logout</Text>
+            <Text style={styles.labelText}>Logout Test</Text>
           </Text>
         </TouchableOpacity>
         <View style={styles.loginContainer}>
@@ -70,16 +70,16 @@ export default class Login extends Component {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => this.handleSubmitForm()} >
-            <Text  style={styles.buttonText}>Acessar</Text>
+            <Text  style={styles.buttonText}>Access</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Cadastro')}>
             <Text style={styles.labels}>
-              <Text style={styles.labelText}>Não tem uma conta?</Text><Text style={styles.labelBoldText}> Cadastre-se agora</Text>
+              <Text style={styles.labelText}>Do not have an account?</Text><Text style={styles.labelBoldText}> Register now</Text>
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Senha')}>
             <Text style={styles.labels}>
-              <Text style={styles.labelText}>Esqueci</Text><Text style={styles.labelBoldText}> minha senha</Text>
+              <Text style={styles.labelText}>I forgot</Text><Text style={styles.labelBoldText}> my password</Text>
             </Text>
           </TouchableOpacity>
         </View>

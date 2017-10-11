@@ -11,7 +11,7 @@ export  default class Senha extends Component {
 
 
           <View style={styles.containerInputs}>
-            <Text style={styles.labelText}>Digite abaixo seu e-mail com que se cadastrou e receba sua senha por e-mail.</Text>
+            <Text style={styles.labelText}>Enter your e-mail address below and receive your password by e-mail.</Text>
             <TextInput style = {styles.input}
                            autoCapitalize="none"
                            onSubmitEditing={() => this.passwordInput.focus()}
@@ -26,13 +26,13 @@ export  default class Senha extends Component {
             <View style={styles.buttonView}>
               <TouchableOpacity style={styles.buttonContainer}
                                    onPress={() => navigate('Cadastro')}>
-                           <Text  style={styles.buttonText}>Enviar</Text>
+                           <Text  style={styles.buttonText}>Send</Text>
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.labelText}>Você lembrou sua senha?</Text>
+            <Text style={styles.labelText}>Did you remember your password??</Text>
             <TouchableOpacity style={styles.labelButton} onPress={() => goBack()}>
-                <Text style={styles.labelBoldText}> Clique aqui para voltar ao login.</Text>
+                <Text style={styles.labelBoldText}> Click here to return to login.</Text>
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

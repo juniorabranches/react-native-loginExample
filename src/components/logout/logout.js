@@ -12,10 +12,10 @@ export  default class Logout extends Component {
           <View style={styles.content}>
             <Card>
               <Image style={styles.logo} source={require('../../components/images/login.png')} />
-              <Text style={styles.labelsHigh}>Obrigado por usar nosso Aplicativo!</Text>
-              <Text style={styles.labels}>Você receberá um e-mail com o link para confirmar a exclusão da sua conta.</Text>
+              <Text style={styles.labelsHigh}>Thank you for using our Application!</Text>
+              <Text style={styles.labels}>You will receive an email with the link to confirm deletion of your account.</Text>
               <Text style={styles.labelsEnd}>
-                <Text style={styles.labelText}>Caso tenha ficado alguma dúvida você pode entrar <Text style={styles.labelBoldText}> em contato conosco</Text></Text>
+                <Text style={styles.labelText}>If you have any questions, you can enter <Text style={styles.labelBoldText}> contact us</Text></Text>
               </Text>
             </Card>
           </View>

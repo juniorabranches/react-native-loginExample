@@ -7,7 +7,6 @@ export  default class Cadastro extends Component {
   constructor(props){
     super(props);
     this.state = {
-      nameInput:'1',
       textInput2:'2',
       textInput3:'3',
       textInput4:'4',
@@ -58,7 +57,7 @@ export  default class Cadastro extends Component {
 			                              autoCorrect={false}
 			                              keyboardType='default'
 			                              returnKeyType="next"
-			                              placeholder='Nome do usuário'
+			                              placeholder='Name'
 			                              placeholderTextColor="#000"
                                     value={this.state.nameInput}
                                     onChange={this.textChange.bind(this)}/>
@@ -67,7 +66,7 @@ export  default class Cadastro extends Component {
 			              isRequired={true}>
 			              <Dropdown style = {styles.dropDown}
 			                ref={(input)=> this.dropDown = input}
-			                label='Selecione sua profissão'
+			                label='Select your profession'
 			                textColor="#000"
 			                baseColor="#000"
 			                data={data} />
@@ -90,7 +89,7 @@ export  default class Cadastro extends Component {
 			                            returnKeyType="next"
 			                            onSubmitEditing={() => this.newPasswordInput.focus()}
 			                            ref={(input)=> this.passwordInput = input}
-			                            placeholder='Digite sua senha'
+			                            placeholder='Password'
 			                            placeholderTextColor="#000"
 			                            secureTextEntry/>
 			            </FormItem>
@@ -99,7 +98,7 @@ export  default class Cadastro extends Component {
 			              <TextInput style = {styles.input}
 			                            returnKeyType="go"
 			                            ref={(input)=> this.newPasswordInput = input}
-			                            placeholder='Confirme sua senha'
+			                            placeholder='Confirm Password'
 			                            placeholderTextColor="#000"
 			                            secureTextEntry/>
 			            </FormItem>
@@ -107,13 +106,13 @@ export  default class Cadastro extends Component {
           </View>
           <View style={styles.buttonView}>
             <TouchableOpacity style={styles.buttonContainer} onPress={this.submit.bind(this)}>
-                         <Text  style={styles.buttonText}>Cadastre-se</Text>
+                         <Text  style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
 
 
             <TouchableOpacity style={styles.labelButton} onPress={() => goBack()}>
               <Text style={styles.labels}>
-                <Text style={styles.labelText}>Já se cadastrou?</Text><Text style={styles.labelBoldText}> Acesse sua conta</Text>
+                <Text style={styles.labelText}>Already registered?</Text><Text style={styles.labelBoldText}> Access</Text>
               </Text>
             </TouchableOpacity>
           </View>

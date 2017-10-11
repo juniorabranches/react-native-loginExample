@@ -112,7 +112,7 @@ export  default class Feed extends Component {
     return (
         <Image source={require('../../components/images/background.png')} style={styles.container}>
             <View style={{ flex: 0, padding: 10}}>
-                <Search ref="search_box" placeholder="Busque por um assunto"/>
+                <Search ref="search_box" placeholder="Search"/>
             </View>
             <View style={{padding: 20}}>
                 <Tabs selected={this.state.page} selectedStyle={{fontWeight:'bold', color:'#FFFFFF'}} onSelect={el=>this.setState({page:el.props.name})}>
