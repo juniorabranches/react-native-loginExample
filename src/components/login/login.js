@@ -1,42 +1,76 @@
 import React, {Component} from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView  } from 'react-native';
 
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const passwordRegex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g
+
 export default class Login extends Component {
+
+  state = {
+    email: '',
+    password: ''
+  }
+
+  handleSubmitForm = () => {
+    const { navigate } = this.props.navigation
+    const { email, password } = this.state
+    const isValidateEmail = emailRegex.test(email)
+    console.log(isValidateEmail)
+    const isValidatePassword = password.trim().length > 0 ? true : false
+    console.log(isValidatePassword)
+    const isValidate = isValidateEmail && isValidatePassword
+    if(isValidate)
+      navigate('Feed')
+    else {
+      alert('Email or Password is wrong!!!')
+    }
+  }
+
+  handleInputChange = (field, value) => {
+    this.setState({
+      ...this.state,
+      [field] : value
+    })
+  }
+
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
+    const { handleSubmitForm, handleInputChange } = this
     return  (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-
         <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Logout')}>
           <Text style={styles.labels}>
             <Text style={styles.labelText}>Teste Tela Logout</Text>
           </Text>
         </TouchableOpacity>
-
         <View style={styles.loginContainer}>
           <Image style={styles.logo} source={require('../../components/images/login.png')} />
         </View>
         <View style={styles.containerInputs}>
-          <TextInput style = {styles.input}
-                         autoCapitalize="none"
-                         onSubmitEditing={() => this.passwordInput.focus()}
-                         autoCorrect={false}
-                         keyboardType='email-address'
-                         returnKeyType="next"
-                         placeholder='email'
-                         placeholderTextColor="#000"/>
-
-          <TextInput style = {styles.input}
-                        returnKeyType="go"
-                        ref={(input)=> this.passwordInput = input}
-                        placeholder='password'
-                        placeholderTextColor="#000"
-                        secureTextEntry/>
+          <TextInput
+            style = {styles.input}
+             autoCapitalize="none"
+             onSubmitEditing={() => this.passwordInput.focus()}
+             onChangeText={value => handleInputChange('email', value)}
+             autoCorrect={false}
+             keyboardType='email-address'
+             returnKeyType="next"
+             placeholder='email'
+             placeholderTextColor="#000" />
+          <TextInput
+            style = {styles.input}
+            onChangeText={value => handleInputChange('password', value)}
+            returnKeyType="go"
+            ref={(input)=> this.passwordInput = input}
+            placeholder='password'
+            placeholderTextColor="#000"
+            secureTextEntry />
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.buttonContainer}
-                               onPress={() => navigate('Feed')}>
-                       <Text  style={styles.buttonText}>Acessar</Text>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => this.handleSubmitForm()} >
+            <Text  style={styles.buttonText}>Acessar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Cadastro')}>
             <Text style={styles.labels}>
