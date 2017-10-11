@@ -6,6 +6,7 @@ import Masonry from 'react-native-masonry';
 import Search from 'react-native-search-box';
 
 import Header from './header'
+import Tabs from 'react-native-tabs';
 
 const data = [
   {
@@ -96,64 +97,37 @@ const data = [
   }
 ];
 
-// Tabs
-let {width} = Dimensions.get('window');
-let widthTab = width / 3;
-const Tabs = ( {children} ) => {
-  return (
-    <View style={{height: 50, width: width, borderBottomWidth: 1, justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', backgroundColor: '#2980b6'}}>
-      {children}
-    </View>
-  )
-}
-
-const Tab = ( {title, active = false} ) => {
-  return (
-    <View style={[{height: 50, width: widthTab, justifyContent: 'center', alignItems: 'center', backgroundColor: '#2980b6'},
-                  active ? {borderBottomWidth: 2, borderBottomColor: '#fff'} : {}
-                ]}>
-      <Text style ={{color: '#fff'}}> {title} </Text>
-    </View>
-  )
-}
-//  /Tabs
-
 export  default class Feed extends Component {
   constructor() {
     super();
     this.state = {
       columns: 2,
-      padding: 5
+      padding: 5,
+      page: 'Tab1'
       }
   }
 
   render() {
     const { navigate } = this.props.navigation;
     return (
-
         <Image source={require('../../components/images/background.png')} style={styles.container}>
-          <View style={{ flex: 0, padding: 10}}>
-            <Search ref="search_box" placeholder="Busque por um assunto"/>
+            <View style={{ flex: 0, padding: 10}}>
+                <Search ref="search_box" placeholder="Busque por um assunto"/>
+            </View>
+            <View style={{padding: 20}}>
+                <Tabs selected={this.state.page} selectedStyle={{fontWeight:'bold', color:'#FFFFFF'}} onSelect={el=>this.setState({page:el.props.name})}>
+                    <Text name="Tab1">Tab1</Text>
+                    <Text name="Tab2">Tab2</Text>
+                    <Text name="Tab3">Tab3</Text>
+                </Tabs>
           </View>
-
-          <View>
-            <Tabs>
-              <Tab title='Tab1' active={true}/>
-              <Tab title='Tab2'/>
-              <Tab title='Tab3'/>
-            </Tabs>
-          </View>
-
-
-
-            <View style={{flex: 2, padding: this.state.padding, backgroundColor: '#fff'}}>
+          <View style={{flex: 2, padding: this.state.padding, backgroundColor: '#fff'}}>
               <Masonry
                 sorted
                 bricks={data}
                 columns={this.state.columns}/>
             </View>
         </Image>
-
     );
   }
 
