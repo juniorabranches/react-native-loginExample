@@ -14,6 +14,7 @@ import Logout from './logout/logout';
 import Senha from './senha/senha';
 import Feed from './feed/feed';
 import Header from './feed/header';
+import ImagePage from './image-page/image';
 
 const LoginApp = StackNavigator({
   Login: { screen: Login },
@@ -21,7 +22,8 @@ const LoginApp = StackNavigator({
   Senha: { screen: Senha },
   Logout: { screen: Logout },
   Feed: { screen: Feed },
-  Header: { screen: Header }
+  Header: { screen: Header },
+  Image: { screen: ImagePage }
 },
   {
     initialRouterName: 'Login',
