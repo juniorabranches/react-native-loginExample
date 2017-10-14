@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {  View, Text, TextInput, TouchableOpacity, Image, Alert, Button ,StyleSheet ,StatusBar, Container, KeyboardAvoidingView } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Form, FormItem } from 'react-native-form-validation';
+import Select from '../select/select'
 
 export  default class Cadastro extends Component {
   constructor(props){
@@ -64,12 +65,7 @@ export  default class Cadastro extends Component {
 			            </FormItem>
 			            <FormItem
 			              isRequired={true}>
-			              <Dropdown style = {styles.dropDown}
-			                ref={(input)=> this.dropDown = input}
-			                label='Select your profession'
-			                textColor="#000"
-			                baseColor="#000"
-			                data={data} />
+                    <Select />
 			            </FormItem>
 			            <FormItem
 			              isRequired={true}>
