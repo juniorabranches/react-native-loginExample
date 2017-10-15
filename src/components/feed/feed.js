@@ -4,6 +4,7 @@ import { Dimensions, Slider, View, Text, TextInput, TouchableOpacity, Image, Ale
 import { Card, ListItem, Button } from 'react-native-elements'
 import Masonry from 'react-native-masonry';
 import Search from 'react-native-search-box';
+import Icon from 'react-native-vector-icons/dist/Feather';
 
 import Header from './header'
 import Tabs from 'react-native-tabs';
@@ -197,11 +198,16 @@ export default class Feed extends Component {
     const { navigate } = this.props.navigation;
     return (
       <Image source={require('../../components/images/background.png')} style={styles.container}>
-        <View style={{ flex: 0, padding: 10 }}>
-          <Search ref="search_box" placeholder="Search" />
+        <View style={{justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
+          <Icon name="user" color="white" size={20}/>
+          <View style={{width: 70, height: 30, backgroundColor: 'white'}}></View>
+          <Icon name="log-out" color="white" size={20}/>
+        </View>
+        <View style={{ flex: 0, padding: 15, marginBottom: 10, marginTop: 5}}>
+          <Search inputHeight={35} inputBorderRadius={30} backgroundColor={'rgba(255, 0, 0, 0)'} ref="search_box" placeholder="Search" />
         </View>
         <View style={{ padding: 20 }}>
-          <Tabs selected={this.state.page} selectedStyle={{ fontWeight: 'bold', color: '#FFFFFF' }} onSelect={el => this.setState({ page: el.props.name })}>
+          <Tabs style={{backgroundColor: '#2196F3'}} selected={this.state.page} selectedStyle={{ fontWeight: 'bold', color: '#FFFFFF' }} onSelect={el => this.setState({ page: el.props.name })}>
             <Text name="Tab1">Tab1</Text>
             <Text name="Tab2">Tab2</Text>
             <Text name="Tab3">Tab3</Text>
@@ -222,6 +228,7 @@ export default class Feed extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 20,
     width: undefined,
     height: undefined,
     backgroundColor: 'transparent',
