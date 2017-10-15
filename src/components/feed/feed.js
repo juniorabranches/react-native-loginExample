@@ -5,6 +5,7 @@ import { Card, ListItem, Button } from 'react-native-elements'
 import Masonry from 'react-native-masonry';
 import Search from 'react-native-search-box';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import Header from './header'
 import Tabs from 'react-native-tabs';
@@ -15,8 +16,20 @@ export default class Feed extends Component {
     this.state = {
       columns: 2,
       padding: 5,
-      page: 'Tab1'
+      page: 'Tab1',
+      loading: true
     }
+  }
+
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({
+        loading: !this.state.loading
+      });
+    }, 1000);
+    // this.setState({
+    //   loading: !this.state.loading
+    // })
   }
 
   getBricks = () => {
@@ -196,31 +209,40 @@ export default class Feed extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    return (
-      <Image source={require('../../components/images/background.png')} style={styles.container}>
-        <View style={{justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
-          <Icon name="user" color="white" size={20}/>
-          <View style={{width: 70, height: 30, backgroundColor: 'white'}}></View>
-          <Icon name="log-out" color="white" size={20}/>
+
+    if(this.state.loading){
+      return (
+        <View style={{ flex: 1 }}>
+          <Spinner visible={this.state.loading} textStyle={{color: '#FFF'}} />
         </View>
-        <View style={{ flex: 0, padding: 15, marginBottom: 10, marginTop: 5}}>
-          <Search inputHeight={35} inputBorderRadius={30} backgroundColor={'rgba(255, 0, 0, 0)'} ref="search_box" placeholder="Search" />
-        </View>
-        <View style={{ padding: 20 }}>
-          <Tabs style={{backgroundColor: '#2196F3'}} selected={this.state.page} selectedStyle={{ fontWeight: 'bold', color: '#FFFFFF' }} onSelect={el => this.setState({ page: el.props.name })}>
-            <Text name="Tab1">Tab1</Text>
-            <Text name="Tab2">Tab2</Text>
-            <Text name="Tab3">Tab3</Text>
-          </Tabs>
-        </View>
-        <View style={{ flex: 2, padding: this.state.padding, backgroundColor: '#fff' }}>
-          <Masonry
-            sorted
-            bricks={this.getBricks()}
-            columns={this.state.columns} />
-        </View>
-      </Image>
-    );
+      )
+    }else{
+      return (
+        <Image source={require('../../components/images/background.png')} style={styles.container}>
+          <View style={{justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
+            <Icon name="user" color="white" size={20}/>
+            <View style={{width: 70, height: 30, backgroundColor: 'white'}}></View>
+            <Icon name="log-out" color="white" size={20}/>
+          </View>
+          <View style={{ flex: 0, padding: 15, marginBottom: 10, marginTop: 5}}>
+            <Search inputHeight={35} inputBorderRadius={30} backgroundColor={'rgba(255, 0, 0, 0)'} ref="search_box" placeholder="Search" />
+          </View>
+          <View style={{ padding: 20 }}>
+            <Tabs style={{backgroundColor: '#2196F3'}} selected={this.state.page} selectedStyle={{ fontWeight: 'bold', color: '#FFFFFF' }} onSelect={el => this.setState({ page: el.props.name })}>
+              <Text name="Tab1">Tab1</Text>
+              <Text name="Tab2">Tab2</Text>
+              <Text name="Tab3">Tab3</Text>
+            </Tabs>
+          </View>
+          <View style={{ flex: 2, padding: this.state.padding, backgroundColor: '#fff' }}>
+            <Masonry
+              sorted
+              bricks={this.getBricks()}
+              columns={this.state.columns} />
+          </View>
+        </Image>
+      );
+    }
   }
 
 }
