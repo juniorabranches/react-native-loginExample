@@ -8,7 +8,8 @@ export default class Login extends Component {
 
   state = {
     email: '',
-    password: ''
+    password: '',
+    loginButtonText: 'Access'
   }
 
   handleSubmitForm = () => {
@@ -31,6 +32,12 @@ export default class Login extends Component {
       ...this.state,
       [field] : value
     })
+  }
+
+  changeLoginButtonText = () => {
+    this.setState({
+      loginButtonText: 'Loading ...'
+    });
   }
 
   render() {
@@ -70,7 +77,9 @@ export default class Login extends Component {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => this.handleSubmitForm()} >
-            <Text  style={styles.buttonText}>Access</Text>
+            <Text
+             style={styles.buttonText}
+             onPress={this.changeLoginButtonText}>{ this.state.loginButtonText }</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Cadastro')}>
             <Text style={styles.labels}>
