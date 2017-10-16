@@ -3,6 +3,20 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, KeyboardAvo
 import { StackNavigator } from 'react-navigation';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loginButtonText: 'Acessar'
+    };
+  }
+
+  changeLoginButtonText = () => {
+    this.setState({
+      loginButtonText: 'Carregando ...'
+    });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return  (
@@ -37,7 +51,9 @@ export default class Login extends Component {
         <View style={styles.buttonView}>
           <TouchableOpacity style={styles.buttonContainer}
                                onPress={() => navigate('Feed')}>
-                       <Text  style={styles.buttonText}>Acessar</Text>
+                       <Text
+                        style={styles.buttonText}
+                        onPress={this.changeLoginButtonText}>{ this.state.loginButtonText }</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.labelButton} onPress={() => navigate('Cadastro')}>
             <Text style={styles.labels}>
