@@ -9,6 +9,8 @@ export default class Login extends Component {
   state = {
     email: '',
     password: '',
+    emailHasError: false,
+    passwordHasError: false,
     loginButtonText: 'Access'
   }
 
@@ -18,18 +20,24 @@ export default class Login extends Component {
     const isValidateEmail = emailRegex.test(email)
     console.log(isValidateEmail)
     const isValidatePassword = password.trim().length > 0 ? true : false
-    console.log(isValidatePassword)
+
     const isValidate = isValidateEmail && isValidatePassword
     if(isValidate)
       navigate('Feed')
-    else {
-      alert('Email or Password is wrong!!!')
+    else if (!isValidateEmail && !isValidatePassword) {
+      this.setState({emailHasError: true, passwordHasError: true})
+    } else if (!isValidatePassword) {
+      this.setState({passwordHasError: true})
+    } else if (!isValidateEmail) {
+      this.setState({emailHasError: true})
     }
   }
 
   handleInputChange = (field, value) => {
     this.setState({
       ...this.state,
+      emailHasError: false,
+      passwordHasError: false,
       [field] : value
     })
   }
@@ -38,6 +46,12 @@ export default class Login extends Component {
     this.setState({
       loginButtonText: 'Loading ...'
     });
+  }
+
+  getTextInputStyle = (isNotValid) => {
+    return {
+      color: isNotValid ? 'red' : 'black'
+    }
   }
 
   render() {
@@ -54,24 +68,31 @@ export default class Login extends Component {
           <Image style={styles.logo} source={require('../../components/images/login.png')} />
         </View>
         <View style={styles.containerInputs}>
+          <View>
           <TextInput
-            style = {styles.input}
+            style = {[styles.input, this.getTextInputStyle(this.state.emailHasError)]}
              autoCapitalize="none"
              onSubmitEditing={() => this.passwordInput.focus()}
              onChangeText={value => handleInputChange('email', value)}
              autoCorrect={false}
              keyboardType='email-address'
              returnKeyType="next"
-             placeholder='email'
-             placeholderTextColor="#000" />
+             placeholder='Email'
+            placeholderTextColor={this.state.emailHasError ? 'red' : '#000'}
+             />
+            {this.renderEmailErrorText()}
+         </View>
+         <View>
           <TextInput
-            style = {styles.input}
+            style={[styles.input, this.getTextInputStyle(this.state.passwordHasError)]}
             onChangeText={value => handleInputChange('password', value)}
             returnKeyType="go"
             ref={(input)=> this.passwordInput = input}
-            placeholder='password'
-            placeholderTextColor="#000"
+            placeholder='Password'
+            placeholderTextColor={this.state.passwordHasError ? 'red' : '#000'}
             secureTextEntry />
+            {this.renderPasswordErrorText()}
+          </View>
         </View>
         <View style={styles.buttonView}>
           <TouchableOpacity
@@ -95,6 +116,18 @@ export default class Login extends Component {
       </KeyboardAvoidingView>
     );
   }
+
+  renderEmailErrorText() {
+    if (this.state.emailHasError) {
+      return <Text style={styles.errorText}>{`This email is invalid`}</Text>
+    }
+  }
+  renderPasswordErrorText() {
+    if (this.state.passwordHasError) {
+      return <Text style={styles.errorText}>{`Password is incorrect`}</Text>
+    }
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -113,7 +146,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       marginBottom: 10,
       padding: 10,
-      color: '#000'
   },
   loginContainer:{
       alignItems: 'center',
@@ -150,5 +182,10 @@ const styles = StyleSheet.create({
       color: '#fff',
       textAlign: 'center',
       fontWeight: '700'
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    paddingLeft: 10
   }
 });
