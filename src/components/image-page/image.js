@@ -4,8 +4,7 @@ import { View, Image, StyleSheet } from 'react-native';
 export default class ImagePage extends Component {
   render() {
     const { params } = this.props.navigation.state;
-    console.log(this.props);
-    console.log(params);
+    
     return (
       <View style={styles.container}>
         <Image
