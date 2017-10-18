@@ -20,7 +20,8 @@ export default class Login extends Component {
     const isValidateEmail = emailRegex.test(email)
     console.log(isValidateEmail)
     const isValidatePassword = password.trim().length > 0 ? true : false
-
+    this.emailHasError = false;
+    this.passwordHasError = false;
     const isValidate = isValidateEmail && isValidatePassword
     if(isValidate)
       navigate('Feed')
@@ -78,7 +79,8 @@ export default class Login extends Component {
              keyboardType='email-address'
              returnKeyType="next"
              placeholder='Email'
-            placeholderTextColor={this.state.emailHasError ? 'red' : '#000'}
+             underlineColorAndroid='#3892E9'
+             placeholderTextColor={this.state.emailHasError ? 'red' : '#000'}
              />
             {this.renderEmailErrorText()}
          </View>
@@ -89,6 +91,7 @@ export default class Login extends Component {
             returnKeyType="go"
             ref={(input)=> this.passwordInput = input}
             placeholder='Password'
+            underlineColorAndroid='#3892E9'
             placeholderTextColor={this.state.passwordHasError ? 'red' : '#000'}
             secureTextEntry />
             {this.renderPasswordErrorText()}

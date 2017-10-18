@@ -111,7 +111,7 @@ export default class Feed extends Component {
     return queryFound;
 
     }
-  }
+
 
   componentWillMount() {
     setTimeout(() => {
@@ -167,29 +167,8 @@ export default class Feed extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const bricks = this.getBricks();
-    
-    return (
-      <Image source={require('../../components/images/background.png')} style={styles.container}>
-        <View style={{ flex: 0, padding: 10 }}>
-          <Search
-            ref="search_box"
-            placeholder="Search"
-            onSearch={this.handleSearch}
-          />
-        </View>
-        <View style={{ padding: 20 }}>
-          <Tabs selected={this.state.page} selectedStyle={{ fontWeight: 'bold', color: '#FFFFFF' }} onSelect={el => this.setState({ page: el.props.name })}>
-            <Text name="Tab1">Tab1</Text>
-            <Text name="Tab2">Tab2</Text>
-            <Text name="Tab3">Tab3</Text>
-          </Tabs>
-        </View>
-        <View style={{ flex: 2, padding: this.state.padding, backgroundColor: '#fff' }}>
-          <Masonry
-            sorted
-            bricks={bricks}
-            columns={this.state.columns} />
-         </View>
+
+
 
     if(this.state.loading){
       return (
@@ -206,7 +185,7 @@ export default class Feed extends Component {
             <Icon name="log-out" color="white" size={20}/>
           </View>
           <View style={{ flex: 0, padding: 15, marginBottom: 10, marginTop: 5}}>
-            <Search inputHeight={35} inputBorderRadius={30} backgroundColor={'rgba(255, 0, 0, 0)'} ref="search_box" placeholder="Search" />
+            <Search inputHeight={35} inputBorderRadius={30} backgroundColor={'rgba(255, 0, 0, 0)'} ref="search_box" placeholder="Search"  onSearch={this.handleSearch}/>
           </View>
           <View style={{ padding: 20 }}>
             <Tabs style={{backgroundColor: '#2196F3'}} selected={this.state.page} selectedStyle={{ fontWeight: 'bold', color: '#FFFFFF' }} onSelect={el => this.setState({ page: el.props.name })}>
