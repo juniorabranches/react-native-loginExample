@@ -3,7 +3,7 @@ import {  View, Text, TextInput, TouchableOpacity, Image, Alert, Button ,StyleSh
 import { Dropdown } from 'react-native-material-dropdown';
 import { Form, FormItem } from 'react-native-form-validation';
 import Spinner from 'react-native-loading-spinner-overlay';
-import Select from '../select/select'
+import { Select, Option } from 'react-native-select-list';
 
 export  default class Cadastro extends Component {
   constructor(props){
@@ -27,7 +27,7 @@ export  default class Cadastro extends Component {
     //   loading: !this.state.loading
     // })
   }
-  
+
     textChange(event){
       this.setState({
         nameInput:event.nativeEvent.text
@@ -43,12 +43,6 @@ export  default class Cadastro extends Component {
     }
 
     render() {
-      let data = [{
-        value: 'Mecânico Eletrônico',
-      }, {
-        value: 'Mecânico Automotivo',
-      }];
-
       const { goBack } = this.props.navigation;
 
 
@@ -70,7 +64,7 @@ export  default class Cadastro extends Component {
                     shouldValidate={true}>
                     <FormItem
                       isRequired={true} validationFunction={this.customValidation.bind(this)}>
-  
+
                         <TextInput style = {styles.input}
                                       autoCapitalize="none"
                                       //onSubmitEditing={() => this.dropDown.focus()}
@@ -85,7 +79,11 @@ export  default class Cadastro extends Component {
                     </FormItem>
                     <FormItem
                       isRequired={true}>
-                      <Select />
+                      <Select>
+                        <Option value={1}>Selecione sua Profissão</Option>
+                        <Option value={2}>Item1</Option>
+                        <Option value={3}>Item2</Option>
+                      </Select>
                     </FormItem>
                     <FormItem
                       isRequired={true}>
@@ -124,8 +122,8 @@ export  default class Cadastro extends Component {
               <TouchableOpacity style={styles.buttonContainer} onPress={this.submit.bind(this)}>
                            <Text  style={styles.buttonText}>Register</Text>
               </TouchableOpacity>
-  
-  
+
+
               <TouchableOpacity style={styles.labelButton} onPress={() => goBack()}>
                 <Text style={styles.labels}>
                   <Text style={styles.labelText}>Already registered?</Text><Text style={styles.labelBoldText}> Access</Text>
