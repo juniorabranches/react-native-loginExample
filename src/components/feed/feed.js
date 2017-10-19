@@ -200,6 +200,11 @@ export default class Feed extends Component {
               bricks={this.getBricks()}
               columns={this.state.columns} />
           </View>
+          <Button
+              raised
+              icon={{name: 'arrow-back'}}
+              title='Go back'
+              onPress={() => { navigate('Login')} }/>
         </Image>
       );
     }
