@@ -4,8 +4,9 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { Form, FormItem } from 'react-native-form-validation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Select, Option } from 'react-native-select-list';
+import { registerUser } from '../api/api.js'
 
-export  default class Cadastro extends Component {
+export default class Cadastro extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -23,9 +24,6 @@ export  default class Cadastro extends Component {
         loading: !this.state.loading
       });
     }, 1000);
-    // this.setState({
-    //   loading: !this.state.loading
-    // })
   }
 
     textChange(event){
@@ -36,6 +34,7 @@ export  default class Cadastro extends Component {
 
     submit(){
       let submitResults = this.refs.form.validate();
+      console.log('SUBMIT RESULTS: ', submitResults)
     }
 
     customValidation(){
@@ -45,7 +44,6 @@ export  default class Cadastro extends Component {
     render() {
       const { goBack } = this.props.navigation;
 
-
       if(this.state.loading){
         return (
           <View style={{ flex: 1 }}>
@@ -53,82 +51,86 @@ export  default class Cadastro extends Component {
           </View>
         )
       }else{
-        return  (
+        return (
           <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <View style={styles.loginContainer}>
               <Image style={styles.logo} source={require('../../components/images/login.png')} />
             </View>
             <View style={styles.containerInputs}>
-                        <Form
-                    ref='form'
-                    shouldValidate={true}>
-                    <FormItem
-                      isRequired={true} validationFunction={this.customValidation.bind(this)}>
+              <Form ref='form' shouldValidate={true}>
 
-                        <TextInput style = {styles.input}
-                                      autoCapitalize="none"
-                                      //onSubmitEditing={() => this.dropDown.focus()}
-                                      ref={(input)=> this.nameInput = input}
-                                      autoCorrect={false}
-                                      keyboardType='default'
-                                      returnKeyType="next"
-                                      placeholder='Name'
-                                      placeholderTextColor="#000"
-                                      value={this.state.nameInput}
-                                      onChange={this.textChange.bind(this)}/>
-                    </FormItem>
-                    <FormItem
-                      isRequired={true}>
-                      <Select>
-                        <Option value={1}>Selecione sua Profissão</Option>
-                        <Option value={2}>Item1</Option>
-                        <Option value={3}>Item2</Option>
-                      </Select>
-                    </FormItem>
-                    <FormItem
-                      isRequired={true}>
+                  <FormItem isRequired={true} validationFunction={this.customValidation.bind(this)}>
                     <TextInput style = {styles.input}
-                                    autoCapitalize="none"
-                                    onSubmitEditing={() => this.passwordInput.focus()}
-                                    ref={(input)=> this.emailInput = input}
-                                    autoCorrect={false}
-                                    keyboardType='email-address'
-                                    returnKeyType="next"
-                                    placeholder='E-mail'
-                                    placeholderTextColor="#000"/>
-                    </FormItem>
-                    <FormItem
-                      isRequired={true}>
-                      <TextInput style = {styles.input}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => this.newPasswordInput.focus()}
-                                    ref={(input)=> this.passwordInput = input}
-                                    placeholder='Password'
-                                    placeholderTextColor="#000"
-                                    secureTextEntry/>
-                    </FormItem>
-                    <FormItem
-                      isRequired={true}>
-                      <TextInput style = {styles.input}
-                                    returnKeyType="go"
-                                    ref={(input)=> this.newPasswordInput = input}
-                                    placeholder='Confirm Password'
-                                    placeholderTextColor="#000"
-                                    secureTextEntry/>
-                    </FormItem>
-            </Form>
+                      autoCapitalize="none"
+                      //onSubmitEditing={() => this.dropDown.focus()}
+                      ref={(input)=> this.nameInput = input}
+                      autoCorrect={false}
+                      keyboardType='default'
+                      returnKeyType="next"
+                      placeholder='Name'
+                      placeholderTextColor="#000"
+                      value={this.state.nameInput}
+                      onChange={this.textChange.bind(this)}/>
+                  </FormItem>
+
+                  <FormItem isRequired={true}>
+                    <Select>
+                      <Option value={1}>Selecione sua Profissão</Option>
+                      <Option value={2}>Item1</Option>
+                      <Option value={3}>Item2</Option>
+                    </Select>
+                  </FormItem>
+
+                  <FormItem isRequired={true}>
+                    <TextInput
+                      style={styles.input}
+                      autoCapitalize="none"
+                      onSubmitEditing={() => this.passwordInput.focus()}
+                      ref={(input)=> this.emailInput = input}
+                      autoCorrect={false}
+                      keyboardType='email-address'
+                      returnKeyType="next"
+                      placeholder='E-mail'
+                      placeholderTextColor="#000"/>
+                  </FormItem>
+
+                  <FormItem isRequired={true}>
+                    <TextInput
+                      style={styles.input}
+                      returnKeyType="next"
+                      onSubmitEditing={() => this.newPasswordInput.focus()}
+                      ref={(input)=> this.passwordInput = input}
+                      placeholder='Password'
+                      placeholderTextColor="#000"
+                      secureTextEntry/>
+                  </FormItem>
+
+                  <FormItem isRequired={true}>
+                    <TextInput
+                      style={styles.input}
+                      returnKeyType="go"
+                      ref={(input)=> this.newPasswordInput = input}
+                      placeholder='Confirm Password'
+                      placeholderTextColor="#000"
+                      secureTextEntry/>
+                  </FormItem>
+              </Form>
             </View>
+
             <View style={styles.buttonView}>
               <TouchableOpacity style={styles.buttonContainer} onPress={this.submit.bind(this)}>
-                           <Text  style={styles.buttonText}>Register</Text>
+                 <Text style={styles.buttonText}>Register</Text>
               </TouchableOpacity>
-
 
               <TouchableOpacity style={styles.labelButton} onPress={() => goBack()}>
                 <Text style={styles.labels}>
-                  <Text style={styles.labelText}>Already registered?</Text><Text style={styles.labelBoldText}> Access</Text>
+                  <Text style={styles.labelText}>
+                    Already registered?
+                  </Text>
+                  <Text style={styles.labelBoldText}> Access</Text>
                 </Text>
               </TouchableOpacity>
+
             </View>
           </KeyboardAvoidingView>
         );
