@@ -6,7 +6,6 @@ import { Card, ListItem, Button } from 'react-native-elements'
 export  default class Logout extends Component {
 
     render() {
-      const { goBack } = this.props.navigation;
       return  (
         <Image source={require('../../components/images/background.png')} style={styles.container}>
           <View style={styles.content}>
@@ -17,6 +16,11 @@ export  default class Logout extends Component {
               <Text style={styles.labelsEnd}>
                 <Text style={styles.labelText}>If you have any questions, you can enter <Text style={styles.labelBoldText}> contact us</Text></Text>
               </Text>
+              <Button
+                  raised
+                  icon={{name: 'arrow-back'}}
+                  title='Go back'
+              onPress={() => { this.props.navigation.navigate('Login')} }/>
             </Card>
           </View>
         </Image>
