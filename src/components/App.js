@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  NetInfo,
   Text,
   View
 } from 'react-native';
@@ -32,6 +33,24 @@ const LoginApp = StackNavigator({
 );
 
 export default class loginExample extends Component {
+
+  componentDidMount() {
+    NetInfo.getConnectionInfo().then((connectionInfo) => {
+      this.handleConnectivityChange(connectionInfo)
+    });
+    NetInfo.addEventListener('connectionChange', connectionInfo => this.handleConnectivityChange(connectionInfo));
+  }
+
+  componentWillUnmount() {
+    NetInfo.removeEventListener('connectionChange', this.handleConnectivityChange);
+  }
+
+  handleConnectivityChange(connectionInfo) {
+    if (connectionInfo.type === 'none') {
+      alert('No internet-connection... Check your connection and try again')
+    }
+  }
+
   render() {
     return <LoginApp />
   }
